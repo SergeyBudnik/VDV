@@ -1,13 +1,14 @@
 package com.its.vdv.data;
 
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.experimental.Builder;
 
 @Builder
 @Getter
 public class Court {
-    private long id;
-    private String name;
-    private double lat = 59.8944444;
-    private double lon = 30.2641667;
+    @NonNull private Long id;
+    @NonNull private String name;
+    @NonNull private Double lat;
+    @NonNull private Double lon;
 }

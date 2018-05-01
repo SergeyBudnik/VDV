@@ -12,22 +12,23 @@ import org.androidannotations.rest.spring.annotations.Path;
 import org.androidannotations.rest.spring.annotations.Post;
 import org.androidannotations.rest.spring.annotations.RequiresHeader;
 import org.androidannotations.rest.spring.annotations.Rest;
-
-import java.util.List;
+import org.androidannotations.rest.spring.api.RestClientHeaders;
 
 @Rest(rootUrl = RestConfiguration.BACKEND_ROOT, converters = JsonMapper.class)
-public interface PostRest {
+public interface PostRest extends RestClientHeaders {
     @Get("/following/post")
-    @RequiresHeader("authorization")
+    @RequiresHeader(Headers.AUTHORIZATION)
     GetAllPostsResponse getAllPosts();
 
     @Get("/post/{postId}")
-    @RequiresHeader("authorization")
-    GetPostByIdResponse getPost(@Path long postId);
+    @RequiresHeader(Headers.AUTHORIZATION)
+    GetPostByIdResponse getPost(
+            @Path long postId
+    );
 
     @Post("/post")
-    @RequiresHeader("authorization")
-    void createPost(@Body CreatePostRequest request);
-
-    void setHeader(String name, String value);
+    @RequiresHeader(Headers.AUTHORIZATION)
+    void createPost(
+            @Body CreatePostRequest request
+    );
 }
